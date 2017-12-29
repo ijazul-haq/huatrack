@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+{% extends 'website/base.html' %}
+{% load staticfiles %}
+{% block main_content %}
+    <div class="container z-depth-1" id="main-container">
+        <div class="empty-2"></div>
+        <div class="row">
+            <div class="col m4">
+                <div class="card z-depth-half">
+                    <div class="row center">
+                        <div class="col s12">
+                            <img class="responsive-img" src="{% static 'img/slide4.jpg' %}" alt="no"/>
+                        </div>
+                        <div class="col s12">
+                            <h6><b>Wuhan University</b></h6>
+                            <h6>by Ijazul Haq: <em>2017</em></h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
