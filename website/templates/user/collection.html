@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+{% extends 'user/base.html' %}
+{% load staticfiles %}
+{% block page_title %}Collection{% endblock %}
+
+{% block errors %}
+    {% if errors %}
+        <div class="row errors">
+            <div class="col">
+                {{ errors }}
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block main_content %}
+    <div class="row user-collection">
+        {% for artwork in collection %}
+            <div class="col m4">
+                <a href="{% url 'website:artwork_detail' artwork.id %}">
+                    <div class="card center">
+                        <div class="card-image responsive-img">
+                            <img src="{{ artwork.path.url }}">
+                        </div>
+                        <div class="card-content">
+                            <h6>{{ artwork.title }}</h6>
+                            <span>{{ artwork.created }}</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="empty-2"></div>
+{% endblock %}

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+{% extends 'user/base.html' %}
+{% load staticfiles %}
+{% block page_title %}Add New Artwork{% endblock %}
+{% block main_content %}
+    <div class="row center">
+    <p style="color: red;">{{ form_errors }}</p>
+        <div class="col s12 m10 offset-m1">
+            <form method="post" action="{% url 'website:artwork_reg' %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="input-field file-field  col s12">
+                        <div class="btn cyan darken-1">
+                            <span>UPLOAD FILE</span>
+                            <input type="file">
+                        </div>
+                        <div class="file-path-wrapper">
+                            {{ form.path }}
+{#                                                        <input class="file-path validate" type="text">#}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        {{ form.title }}
+                        <label for="title">Title</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        {{ form.created }}
+                        <label for="title">Date</label>
+                    </div>
+                </div>
+                <div class="row center">
+                    <div class="input-field col s12">
+                        <input type="submit" value="REGISTER" class="validate btn cyan darken-3">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+{% extends 'website/base.html' %}
+{% block main_content %}
+    <div class="row center">
+        <h4>Register</h4>
+        <p style="color: red">{{ form_errors }}</p>
+        <form method="post" action="{% url 'website:user_reg' %}" class="col s12">
+            {% csrf_token %}
+{#            {{ profile_form }}#}
+            <div class="row cyan-text text-darken-2">
+                <div class="empty-1"></div>
+                <div class="input-field col s6 offset-s3">
+                    <i class="fa fa-user prefix"></i>
+                    {{ user_form.username }}
+                    <label for="icon_email">Username</label>
+                </div>
+                <div class="input-field col s6 offset-s3">
+                    <i class="fa fa-at prefix"></i>
+                    {{ user_form.email }}
+                    <label for="icon_prefix">Email</label>
+                </div>
+                <div class="input-field col s6 offset-s3">
+                    <i class="fa fa-key prefix"></i>
+                    {{ user_form.password }}
+                    <label for="icon_prefix">Password</label>
+                </div>
+                <div class="input-field col s6 offset-s3">
+                    <input type="submit" value="REGISTER" class="btn btn-large">
+                </div>
+                <div class="input-field col s6 offset-s3">
+                    If you already have account please <a href="{% url 'website:user_login' %}">Login</a>.
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="empty-2"></div>
+{% endblock %}

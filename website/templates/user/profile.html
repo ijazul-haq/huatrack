@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+{% extends 'user/base.html' %}
+{% load staticfiles %}
+{% block page_title %}Profile Setting{% endblock %}
+{% block user_nave %}
+    <li><a href="setting.html"><i class="fa fa-gear"></i></a></li>
+{% endblock %}
+{% block main_content %}
+    <div class="empty-1"></div>
+    <div class="row">
+        <div class="col s12 l8 offset-l2 ">
+            <table class="responsive-table striped">
+                <tr>
+                    <td>Name</td>
+                    <td>{{ user.name }}</td>
+                </tr>
+                <tr>
+                    <td>Username</td>
+                    <td>{{ user.username }}</td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td>{{ user.email }}</td>
+                </tr>
+                <tr>
+                    <td>Public Key</td>
+                    <td>{{ user.userprofile.public_key }}</td>
+                </tr>
+                <tr>
+                    <td>Private Key</td>
+                    <td>{{ user.userprofile.private_key }}</td>
+                </tr>
+                <tr>
+                    <td>Date Joined</td>
+                    <td>{{ user.date_joined }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="empty-2"></div>
+    <div class="empty-2"></div>
+{% endblock %}

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+{% extends 'user/base.html' %}
+{% load staticfiles %}
+{% block page_title %}Blockchan Status{% endblock %}
+{% block user_nave %}
+    <li><a href="setting.html"><i class="fa fa-gear"></i></a></li>
+{% endblock %}
+{% block main_content %}
+
+    {{ sent_tx }}
+    <hr>
+    {{ txid }}
+    <hr>
+    {{ status }}
+    <hr>
+    {{ bdb }}
+
+
+{% endblock %}
