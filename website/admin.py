@@ -1,8 +1,5 @@
 from django.contrib import admin
-from .models import User, Artwork
+from .models import Artwork, UserProfile
 
-admin.site.register(User)
 admin.site.register(Artwork)
-
-
-
+admin.site.register(UserProfile)

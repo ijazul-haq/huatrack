@@ -1,6 +1,7 @@
 import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+MEDIA_DIR = os.path.join(BASE_DIR, 'media')
 
 SECRET_KEY = 'tmhu(^4xkiqhdxho_!zivkhg*z91et_$7)@=h_c&d2*6^(rzyw'
 
@@ -53,7 +54,7 @@ WSGI_APPLICATION = 'huatrack.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': os.path.join(BASE_DIR, 'db.db'),
     }
 }
 
@@ -72,6 +73,15 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+# SESSION_COOKIE_AGE = 15*60
+# SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+PASSWORD_HASHERS = [
+    'django.contrib.auth.hashers.Argon2PasswordHasher',
+    'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
+    'django.contrib.auth.hashers.BCryptPasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
+]
 
 
 LANGUAGE_CODE = 'en-us'
@@ -85,6 +95,8 @@ USE_L10N = True
 USE_TZ = True
 
 
-STATIC_URL = '/static/'
+MEDIA_ROOT = MEDIA_DIR
 
-TEMPLATE_DIRS = (os.path.join(BASE_DIR,  'templates'),)
+LOGIN_URL = '/website/user_login/'
+STATIC_URL = '/static/'
+MEDIA_URL = '/media/'

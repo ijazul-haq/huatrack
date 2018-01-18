@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+{% extends 'user/base.html' %}
+{% load staticfiles %}
+
+{% block page_title %}
+    <a href="{% url 'website:collection' %}"><i class="fa fa-arrow-left"></i></a>
+    &nbsp; Collection / {{ artwork.title }}
+{% endblock %}
+
+{% block user_nave %}
+    <li><a href="#"><i class="fa fa-trash-o"></i> Delete</a></li>
+    <li><a href="#"><i class="fa fa-download"></i> Download</a></li>
+    <li><a href="#modal" class="modal-trigger"><i class="fa fa-share"></i> Transfer</a></li>
+{% endblock %}
+
+{% block errors %}
+    {{ errors }}
+{% endblock %}
+
+{% block main_content %}
+    <div class="row">
+        <div class="col l5">
+            <img class="responsive-img z-depth-1" src="{{ artwork.path.url }}">
+        </div>
+        <div class="col l7">
+            <div class="row">
+                <div class="col l12">
+                    <table class="responsive-table small-text condensed">
+                        <tr>
+                            <td>Title:</td>
+                            <td>{{ artwork.title }}</td>
+                        </tr>
+                        <tr>
+                            <td>Date of Creation:</td>
+                            <td>{{ artwork.created }}</td>
+                        </tr>
+                        <tr>
+                            <td>Registered On:</td>
+                            <td>{{ artwork.timestamp }}</td>
+                        </tr>
+                        <tr>
+                            <td>Status:</td>
+                            <td>{{ artwork.status }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="divider"></div>
+            <h6>Blockchain Info</h6>
+            <div class="row">
+                <div class="{% if artwork.status != 'registered' %}hide{% endif %} col l12" id="bc-info">
+                    <table class="responsive-table small-text condensed">
+                        <tr>
+                            <td>Owner ID:</td>
+                            <td id="tx-id">{{ artwork.artist }}</td>
+                        </tr>
+                        <tr>
+                            <td>ID:</td>
+                            <td id="tx-id">{{ artwork.txid }}</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="{% if artwork.status == 'registered' %}hide{% endif %} col l12" id="bc-action">
+                    <h6><b class="red-text">No Blockchain info available right now</b></h6>
+                    <div class="empty-2"></div>
+                    <a href="{% url 'website:asset_create' artwork.id %}" class="btn red" id="asset-creat">
+                        <i class="fa fa-lock"></i> PUSH TO BLOCKCHAIN
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="empty-2"></div>
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <h4>Transfer Artwork</h4>
+            <form method="post" action="{% url 'website:asset_transfer' artwork.id%}">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col l10 offset-l1 input-field">
+                        <input type="email" name="email">
+                        <label for="title">Recipient Email:</label>
+                    </div>
+                    <div class="col l10 offset-l1 input-field hidden">
+                        <input type="text" name="txid" value="{{ artwork.txid }}" class="hide">
+                    </div>
+                    <div class="col l10 offset-l1 input-field">
+                        <input class="btn modal-action modal-close" type="submit" value="SEND">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
